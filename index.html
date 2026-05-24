@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SNPHA 2026 – 2ème Séminaire National</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ─── RESET & VARIABLES ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:      #1a3a2a;
+      --dark2:     #12281d;
+      --mid:       #2d5a3d;
+      --gold:      #c8972a;
+      --gold-light:#e8b84b;
+      --cream:     #f5f0e8;
+      --cream2:    #ece6d8;
+      --text:      #1a1a1a;
+      --text-light:#4a5568;
+      --white:     #ffffff;
+      --shadow:    rgba(26,58,42,0.18);
+      --radius:    12px;
+      --radius-lg: 20px;
+      --trans:     0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────────── */
+    h1,h2,h3,h4 {
+      font-family: 'Playfair Display', serif;
+      line-height: 1.25;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── LANGUAGE DIRECTION ─────────────────────────────── */
+    [data-lang="ar"] { font-family: 'Amiri', serif; direction: rtl; }
+
+    /* ─── UTILITY ────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .section-pad { padding: 96px 0; }
+    .section-pad-sm { padding: 72px 0; }
+
+    .gold-line {
+      width: 64px; height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      margin: 16px 0 32px;
+    }
+    .gold-line.center { margin: 16px auto 32px; }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .section-title.light { color: var(--white); }
+    .center-text { text-align: center; }
+
+    /* ─── SCROLL-REVEAL ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+    .reveal-delay-5 { transition-delay: .5s; }
+
+    /* ─── NAVBAR ─────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background var(--trans), box-shadow var(--trans), padding var(--trans);
+      padding: 20px 0;
+    }
+    #navbar.scrolled {
+      background: rgba(18, 40, 29, 0.97);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 30px rgba(0,0,0,.25);
+      padding: 12px 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+    }
+    .nav-logo-badge {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--dark2);
+      font-family: 'Playfair Display', serif;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(200,151,42,.4);
+    }
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--white);
+    }
+    .nav-logo-sub {
+      font-size: .65rem;
+      font-weight: 400;
+      opacity: .75;
+      font-family: 'Inter', sans-serif;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,.85);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color var(--trans), background var(--trans);
+      white-space: nowrap;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold-light);
+      background: rgba(200,151,42,.12);
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    /* Language Toggle */
+    #lang-toggle {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .lang-btn {
+      padding: 5px 12px;
+      font-size: .78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.6);
+      transition: all var(--trans);
+      border-radius: 50px;
+      letter-spacing: .05em;
+    }
+    .lang-btn.active {
+      background: var(--gold);
+      color: var(--dark2);
+    }
+    /* Hamburger */
+    #hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    #hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--trans);
+    }
+    #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #hamburger.open span:nth-child(2) { opacity: 0; }
+    #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    #mobile-menu {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--dark2);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transform: translateX(100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform .42s cubic-bezier(.4,0,.2,1), opacity .35s ease, visibility 0s linear .42s;
+    }
+    #mobile-menu.open {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+      transition: transform .42s cubic-bezier(.4,0,.2,1), opacity .35s ease, visibility 0s linear 0s;
+    }
+    #mobile-menu a {
+      color: var(--white);
+      font-size: 1.3rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 10px;
+      width: 280px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: background var(--trans), color var(--trans), opacity .35s ease, transform .35s ease;
+    }
+    #mobile-menu.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #mobile-menu.open a:nth-child(2) { transition-delay: .07s; }
+    #mobile-menu.open a:nth-child(3) { transition-delay: .12s; }
+    #mobile-menu.open a:nth-child(4) { transition-delay: .17s; }
+    #mobile-menu.open a:nth-child(5) { transition-delay: .22s; }
+    #mobile-menu.open a:nth-child(6) { transition-delay: .27s; }
+    #mobile-menu.open a:nth-child(7) { transition-delay: .32s; }
+    #mobile-menu.open a:nth-child(8) { transition-delay: .37s; }
+    #mobile-menu a:hover { background: rgba(200,151,42,.15); color: var(--gold-light); }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--white);
+      font-size: 1.1rem;
+      transition: background var(--trans);
+    }
+    #mobile-menu-close:hover { background: rgba(200,151,42,.2); color: var(--gold); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0d2016 0%, #1a3a2a 40%, #2d5a3d 70%, #1a3025 100%);
+    }
+    /* Geometric pattern overlay */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(200,151,42,.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(200,151,42,.08) 0%, transparent 45%),
+        radial-gradient(circle at 60% 10%, rgba(45,90,61,.4) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    /* Decorative SVG lines */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(45deg, transparent 48%, rgba(200,151,42,.04) 49%, rgba(200,151,42,.04) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(200,151,42,.04) 49%, rgba(200,151,42,.04) 51%, transparent 52%);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* Floating geometric shapes */
+    .hero-shape {
+      position: absolute;
+      border: 1px solid rgba(200,151,42,.15);
+      border-radius: 4px;
+      animation: floatShape 8s ease-in-out infinite;
+    }
+    .hero-shape-1 {
+      width: 120px; height: 120px;
+      top: 10%; right: 8%;
+      transform: rotate(15deg);
+      animation-delay: 0s;
+    }
+    .hero-shape-2 {
+      width: 70px; height: 70px;
+      top: 60%; right: 18%;
+      transform: rotate(-20deg);
+      animation-delay: 2s;
+    }
+    .hero-shape-3 {
+      width: 180px; height: 180px;
+      bottom: 5%; left: 3%;
+      transform: rotate(5deg);
+      animation-delay: 4s;
+      border-color: rgba(200,151,42,.08);
+    }
+    .hero-shape-4 {
+      width: 50px; height: 50px;
+      top: 35%; left: 6%;
+      transform: rotate(-30deg);
+      background: rgba(200,151,42,.06);
+      animation-delay: 1s;
+    }
+    @keyframes floatShape {
+      0%,100% { transform: translateY(0) rotate(15deg); }
+      50%      { transform: translateY(-15px) rotate(20deg); }
+    }
+    .hero-shape-2 { animation-name: floatShape2; }
+    .hero-shape-4 { animation-name: floatShape4; }
+    @keyframes floatShape2 {
+      0%,100% { transform: translateY(0) rotate(-20deg); }
+      50%      { transform: translateY(-10px) rotate(-25deg); }
+    }
+    @keyframes floatShape4 {
+      0%,100% { transform: translateY(0) rotate(-30deg); }
+      50%      { transform: translateY(-20px) rotate(-25deg); }
+    }
+
+    /* ─── HERO ENTRANCE ANIMATIONS ─────────────────────── */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroBadgePop {
+      from { opacity: 0; transform: scale(.85) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .hero-institution   { animation: heroFadeUp .65s ease both .15s; }
+    .hero-badge         { animation: heroBadgePop .55s cubic-bezier(.34,1.4,.64,1) both .3s; }
+    .hero-title         { animation: heroFadeUp .7s ease both .45s; }
+    .hero-theme         { animation: heroFadeUp .65s ease both .6s; }
+    .hero-subtitle-text { animation: heroFadeUp .6s ease both .72s; }
+    .hero-meta          { animation: heroFadeUp .6s ease both .84s; }
+    .hero-keywords      { animation: heroFadeUp .6s ease both .96s; }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    .hero-institution {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(232,184,75,.7);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-institution::before {
+      content: '';
+      display: block;
+      width: 30px; height: 1px;
+      background: rgba(232,184,75,.5);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--dark2);
+      font-weight: 800;
+      font-size: .9rem;
+      padding: 8px 20px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(200,151,42,.4);
+      animation: pulseBadge 2.5s ease-in-out infinite;
+      letter-spacing: .05em;
+      font-family: 'Inter', sans-serif;
+    }
+    @keyframes pulseBadge {
+      0%,100% { box-shadow: 0 4px 20px rgba(200,151,42,.4); }
+      50%      { box-shadow: 0 6px 30px rgba(200,151,42,.65); }
+    }
+    .hero-badge i { font-size: .85rem; }
+
+    .hero-title {
+      font-size: clamp(2rem, 5.5vw, 4rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .hero-title span {
+      color: var(--gold-light);
+    }
+    .hero-theme {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: rgba(255,255,255,.82);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 16px;
+      max-width: 760px;
+      line-height: 1.5;
+    }
+    .hero-subtitle-text {
+      font-size: clamp(.85rem, 1.8vw, 1rem);
+      color: rgba(255,255,255,.6);
+      max-width: 680px;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: rgba(255,255,255,.85);
+      font-size: .83rem;
+      font-weight: 500;
+    }
+    .hero-meta-item i { color: var(--gold); font-size: .9rem; }
+
+    .hero-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .keyword-tag {
+      background: rgba(200,151,42,.12);
+      border: 1px solid rgba(200,151,42,.3);
+      color: var(--gold-light);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 50px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* Countdown strip */
+    .hero-countdown-strip {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(12,22,16,.75);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(200,151,42,.2);
+      padding: 20px 0;
+      z-index: 2;
+    }
+    .countdown-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .countdown-label {
+      color: rgba(255,255,255,.6);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-right: 12px;
+    }
+    .countdown-units {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .countdown-unit {
+      text-align: center;
+      min-width: 64px;
+    }
+    .countdown-num {
+      display: block;
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .countdown-unit-label {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-top: 4px;
+      display: block;
+    }
+    .countdown-sep {
+      font-size: 1.5rem;
+      color: rgba(200,151,42,.5);
+      font-weight: 700;
+      align-self: flex-start;
+      padding-top: 4px;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 100px;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,.4);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      z-index: 3;
+      animation: scrollHint 2s ease-in-out infinite;
+    }
+    .scroll-hint i { font-size: 1rem; }
+    @keyframes scrollHint {
+      0%,100% { opacity: .4; transform: translateY(0); }
+      50%      { opacity: .8; transform: translateY(6px); }
+    }
+
+    /* ─── ARGUMENTAIRE ───────────────────────────────────── */
+    #argumentaire {
+      background: var(--white);
+    }
+    .argumentaire-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .argumentaire-text p {
+      color: var(--text-light);
+      font-size: .97rem;
+      margin-bottom: 20px;
+      line-height: 1.85;
+    }
+    .argumentaire-text p:last-child { margin-bottom: 0; }
+    .argumentaire-highlight {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      color: var(--white);
+      position: sticky;
+      top: 100px;
+    }
+    .argumentaire-highlight h3 {
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 24px;
+    }
+    .highlight-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .highlight-item:last-child { margin-bottom: 0; }
+    .highlight-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(200,151,42,.15);
+      border: 1px solid rgba(200,151,42,.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .highlight-item-text strong {
+      display: block;
+      font-size: .88rem;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+    .highlight-item-text span {
+      font-size: .82rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.5;
+    }
+
+    /* ─── AXES THEMATIQUES ───────────────────────────────── */
+    #axes {
+      background: var(--cream);
+    }
+    .axes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .axe-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      border: 1px solid rgba(26,58,42,.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--trans), box-shadow var(--trans);
+      cursor: default;
+    }
+    .axe-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+    .axe-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; right: -40px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,151,42,.06) 0%, transparent 70%);
+      transition: transform var(--trans);
+    }
+    .axe-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(26,58,42,.14);
+    }
+    .axe-card:hover::after { transform: scale(1.4); }
+    .axe-number {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .axe-icon-wrap {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--dark), var(--mid));
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(26,58,42,.2);
+    }
+    .axe-icon-wrap i { color: var(--gold); font-size: 1.3rem; }
+    .axe-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 14px;
+      line-height: 1.35;
+    }
+    .axe-desc {
+      font-size: .85rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+
+    /* ─── DATES TIMELINE ─────────────────────────────────── */
+    #dates {
+      background: linear-gradient(135deg, var(--dark2) 0%, var(--dark) 50%, var(--mid) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #dates::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 10% 50%, rgba(200,151,42,.08) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 50%, rgba(200,151,42,.05) 0%, transparent 35%);
+      pointer-events: none;
+    }
+    .timeline {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), rgba(200,151,42,.2));
+    }
+    .timeline-item {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      flex-shrink: 0;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: 3px solid var(--dark2);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 4px rgba(200,151,42,.15);
+    }
+    .timeline-dot i { color: var(--dark2); font-size: .95rem; }
+    .timeline-body {
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      flex: 1;
+      transition: background var(--trans);
+    }
+    .timeline-body:hover { background: rgba(255,255,255,.1); }
+    .timeline-date {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .timeline-date .date-badge {
+      background: rgba(200,151,42,.15);
+      border: 1px solid rgba(200,151,42,.3);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: .72rem;
+    }
+    .timeline-event {
+      font-size: .97rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .timeline-note {
+      font-size: .8rem;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ─── COMMITTEES ─────────────────────────────────────── */
+    #comites {
+      background: var(--white);
+    }
+    .honor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .honor-card {
+      background: linear-gradient(135deg, var(--cream) 0%, var(--cream2) 100%);
+      border: 1px solid rgba(26,58,42,.1);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      transition: transform var(--trans), box-shadow var(--trans);
+    }
+    .honor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px var(--shadow); }
+    .honor-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--dark), var(--mid));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 16px rgba(26,58,42,.2);
+    }
+    .honor-avatar i { color: var(--gold); font-size: 1.2rem; }
+    .honor-role {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .honor-name {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .honor-affil {
+      font-size: .78rem;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    .president-card {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 48px;
+      color: var(--white);
+      box-shadow: 0 12px 40px rgba(26,58,42,.2);
+    }
+    .president-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(200,151,42,.15);
+      border: 3px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .president-avatar i { color: var(--gold); font-size: 1.8rem; }
+    .president-role {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+    .president-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .president-affil { font-size: .88rem; color: rgba(255,255,255,.65); }
+
+    .committees-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .committee-block {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid rgba(26,58,42,.08);
+    }
+    .committee-block-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+    .committee-block-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--dark), var(--mid));
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .committee-block-icon i { color: var(--gold); font-size: 1.1rem; }
+    .committee-block-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .committee-president-line {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin: 12px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .committee-president-line i { font-size: .75rem; }
+    .member-list {
+      list-style: none;
+    }
+    .member-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(26,58,42,.06);
+      font-size: .82rem;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+    .member-list li:last-child { border-bottom: none; }
+    .member-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .member-list li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ─── PRACTICAL INFO ─────────────────────────────────── */
+    #infos {
+      background: var(--cream);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .info-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      border: 1px solid rgba(26,58,42,.08);
+      transition: transform var(--trans), box-shadow var(--trans);
+      position: relative;
+      overflow: hidden;
+    }
+    .info-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transition: transform var(--trans);
+      transform-origin: left;
+    }
+    .info-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px var(--shadow); }
+    .info-card:hover::after { transform: scaleX(1); }
+    .info-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--dark), var(--mid));
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .info-icon i { color: var(--gold); font-size: 1.2rem; }
+    .info-card-title {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .info-card-body {
+      font-size: .88rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .info-card-body strong { color: var(--dark); font-weight: 600; }
+    .info-card-body .highlight-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--dark);
+      font-family: 'Playfair Display', serif;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .languages-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .lang-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--dark), var(--mid));
+      color: var(--white);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: .83rem;
+      font-weight: 600;
+    }
+    .lang-chip i { color: var(--gold); }
+
+    /* ─── CONTACT ────────────────────────────────────────── */
+    #contact {
+      background: var(--white);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .contact-info-block {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      border: 1px solid rgba(26,58,42,.08);
+      transition: box-shadow var(--trans);
+    }
+    .contact-item:hover { box-shadow: 0 8px 24px var(--shadow); }
+    .contact-item-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--dark), var(--mid));
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-item-icon i { color: var(--gold); font-size: 1rem; }
+    .contact-item-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .contact-item-value {
+      font-size: .9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .contact-item-value a {
+      color: var(--dark);
+      font-weight: 600;
+      transition: color var(--trans);
+    }
+    .contact-item-value a:hover { color: var(--gold); }
+
+    .contact-map-placeholder {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      color: var(--white);
+      height: 100%;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-map-placeholder h3 {
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+    }
+    .contact-map-placeholder p {
+      font-size: .88rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .map-icon {
+      font-size: 3rem;
+      color: rgba(200,151,42,.25);
+      margin-bottom: 20px;
+    }
+    .location-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .location-detail i { color: var(--gold); margin-top: 2px; font-size: .9rem; }
+    .location-detail span { font-size: .83rem; color: rgba(255,255,255,.7); line-height: 1.5; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--dark2);
+      color: rgba(255,255,255,.65);
+      padding: 60px 0 32px;
+      border-top: 1px solid rgba(200,151,42,.15);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logo-badge {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--dark2);
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(200,151,42,.3);
+    }
+    .footer-logo-text { font-family: 'Playfair Display', serif; }
+    .footer-logo-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-logo-year {
+      font-size: .75rem;
+      color: rgba(255,255,255,.5);
+    }
+    .footer-divider {
+      width: 1px;
+      height: 60px;
+      background: rgba(200,151,42,.2);
+    }
+    .footer-motto-block { text-align: right; }
+    .footer-motto {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--gold-light);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .footer-motto-sub {
+      font-size: .75rem;
+      color: rgba(255,255,255,.4);
+      letter-spacing: .08em;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy { font-size: .78rem; }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: .78rem;
+      color: rgba(255,255,255,.45);
+      transition: color var(--trans);
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* Back to top */
+    #back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--dark2);
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(200,151,42,.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity var(--trans), transform var(--trans);
+      z-index: 900;
+      border: none;
+    }
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top:hover { transform: translateY(-3px); box-shadow: 0 6px 28px rgba(200,151,42,.55); }
+
+    /* ─── DECORATIVE SEPARATOR ───────────────────────────── */
+    .wave-sep {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .wave-sep svg { display: block; width: 100%; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .argumentaire-grid { grid-template-columns: 1fr; gap: 40px; }
+      .argumentaire-highlight { position: static; }
+      .honor-grid { grid-template-columns: 1fr 1fr; }
+      .committees-dual { grid-template-columns: 1fr; }
+      .container { padding: 0 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      #hamburger { display: flex; }
+
+      .section-pad { padding: 60px 0; }
+      .section-pad-sm { padding: 44px 0; }
+      .container { padding: 0 16px; }
+
+      /* Hero */
+      .hero-content { max-width: 100%; }
+      .hero-shape-3 { display: none; }
+
+      /* Axes */
+      .axes-grid { grid-template-columns: 1fr; }
+      .axe-card { padding: 28px 24px; }
+
+      /* Info */
+      .info-grid { grid-template-columns: 1fr; }
+      .info-card { padding: 28px 22px; }
+
+      /* Contact */
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-map-placeholder { min-height: 260px; padding: 36px 28px; }
+
+      /* Committees */
+      .honor-grid { grid-template-columns: 1fr; }
+      .committees-dual { grid-template-columns: 1fr; }
+      .president-card { flex-direction: column; text-align: center; padding: 28px 24px; gap: 16px; }
+      .president-avatar { margin: 0 auto; }
+      .committee-block { padding: 24px 20px; }
+
+      /* Argumentaire */
+      .argumentaire-highlight { padding: 28px 24px; }
+
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+      .footer-divider { display: none; }
+      .footer-motto-block { text-align: center; }
+      .footer-logo { justify-content: center; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+      footer { padding: 48px 0 28px; }
+
+      /* Countdown */
+      .hero-countdown-strip { padding: 14px 0; }
+      .countdown-num { font-size: 1.5rem; }
+      .countdown-unit { min-width: 48px; }
+
+      /* Timeline */
+      .timeline::before { left: 18px; }
+      .timeline-dot { width: 40px; height: 40px; flex-shrink: 0; }
+      .timeline-item { gap: 18px; }
+      .timeline-body { padding: 16px 18px; }
+
+      .scroll-hint { display: none; }
+      #back-to-top { bottom: 20px; right: 20px; width: 42px; height: 42px; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-meta { gap: 10px; }
+      .hero-meta-item { font-size: .8rem; padding: 8px 12px; }
+      .highlight-item { gap: 12px; }
+      .highlight-icon { width: 38px; height: 38px; }
+      .honor-card { padding: 20px; }
+      .contact-item { padding: 16px 18px; gap: 14px; }
+      .nav-logo-text { font-size: .95rem; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 14px; }
+      .hero-meta { flex-direction: column; }
+      .hero-meta-item { justify-content: center; }
+      .countdown-units { gap: 6px; }
+      .countdown-label { display: none; }
+      .countdown-sep { font-size: 1.2rem; }
+      .countdown-num { font-size: 1.3rem; }
+      .hero-keywords { gap: 6px; }
+      .keyword-tag { font-size: .69rem; padding: 3px 10px; }
+      .member-list li { font-size: .78rem; }
+      .footer-links { gap: 14px; }
+      .languages-row { flex-wrap: wrap; }
+      .axe-card { padding: 22px 18px; }
+      .info-card { padding: 22px 18px; }
+    }
+
+    @media (max-width: 360px) {
+      .container { padding: 0 12px; }
+      .countdown-unit { min-width: 40px; }
+      .countdown-num { font-size: 1.15rem; }
+      .hero-badge { font-size: .78rem; padding: 6px 14px; }
+      .nav-logo-badge { width: 36px; height: 36px; font-size: .85rem; }
+      .axe-card, .info-card { padding: 18px 14px; }
+      .committee-block { padding: 18px 14px; }
+    }
+
+    /* ─── REDUCED MOTION ─────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .hero-shape { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" role="navigation" aria-label="Navigation principale">
+  <div class="container nav-inner">
+
+    <a href="#hero" class="nav-logo" aria-label="Retour à l'accueil">
+      <div class="nav-logo-badge">S</div>
+      <div>
+        <div class="nav-logo-text">SNPHA <span style="color:var(--gold-light)">2026</span></div>
+        <div class="nav-logo-sub" data-fr="Séminaire National" data-en="National Seminar">Séminaire National</div>
+      </div>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#hero"        data-fr="Accueil"          data-en="Home"        class="nav-link">Accueil</a></li>
+      <li><a href="#argumentaire" data-fr="Argumentaire"    data-en="About"       class="nav-link">Argumentaire</a></li>
+      <li><a href="#axes"        data-fr="Axes thématiques" data-en="Themes"      class="nav-link">Axes thématiques</a></li>
+      <li><a href="#dates"       data-fr="Dates"            data-en="Dates"       class="nav-link">Dates</a></li>
+      <li><a href="#comites"     data-fr="Comités"          data-en="Committees"  class="nav-link">Comités</a></li>
+      <li><a href="#infos"       data-fr="Informations"     data-en="Info"        class="nav-link">Informations</a></li>
+      <li><a href="#contact"     data-fr="Contact"          data-en="Contact"     class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <div id="lang-toggle" role="group" aria-label="Choisir la langue">
+        <button class="lang-btn active" data-lang="fr" onclick="setLang('fr')" aria-pressed="true">FR</button>
+        <button class="lang-btn"        data-lang="en" onclick="setLang('en')" aria-pressed="false">EN</button>
+      </div>
+      <div id="hamburger" onclick="toggleMobileMenu()" aria-label="Ouvrir le menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <button id="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Fermer le menu">
+    <i class="fas fa-times"></i>
+  </button>
+  <a href="#hero"         onclick="toggleMobileMenu()" data-fr="Accueil"          data-en="Home">Accueil</a>
+  <a href="#argumentaire" onclick="toggleMobileMenu()" data-fr="Argumentaire"     data-en="About">Argumentaire</a>
+  <a href="#axes"         onclick="toggleMobileMenu()" data-fr="Axes thématiques" data-en="Themes">Axes thématiques</a>
+  <a href="#dates"        onclick="toggleMobileMenu()" data-fr="Dates"            data-en="Dates">Dates</a>
+  <a href="#comites"      onclick="toggleMobileMenu()" data-fr="Comités"          data-en="Committees">Comités</a>
+  <a href="#infos"        onclick="toggleMobileMenu()" data-fr="Informations"     data-en="Info">Informations</a>
+  <a href="#contact"      onclick="toggleMobileMenu()" data-fr="Contact"          data-en="Contact">Contact</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════════ -->
+<section id="hero" aria-label="Présentation du séminaire">
+
+  <!-- Floating shapes -->
+  <div class="hero-shape hero-shape-1" aria-hidden="true"></div>
+  <div class="hero-shape hero-shape-2" aria-hidden="true"></div>
+  <div class="hero-shape hero-shape-3" aria-hidden="true"></div>
+  <div class="hero-shape hero-shape-4" aria-hidden="true"></div>
+
+  <div class="container" style="padding-top:120px; padding-bottom:140px;">
+    <div class="hero-content">
+
+      <div class="hero-institution" data-fr="République Algérienne Démocratique et Populaire – Ministère de l'Enseignement Supérieur et de la Recherche Scientifique" data-en="People's Democratic Republic of Algeria – Ministry of Higher Education and Scientific Research">
+        République Algérienne Démocratique et Populaire – Ministère de l'Enseignement Supérieur et de la Recherche Scientifique
+      </div>
+
+      <div class="hero-badge">
+        <i class="fas fa-star"></i>
+        <span data-fr="2ème Séminaire National" data-en="2nd National Seminar">2ème Séminaire National</span>
+        &nbsp;·&nbsp; SNPHA 2026
+      </div>
+
+      <h1 class="hero-title" data-fr="2ème Séminaire National <span>SNPHA 2026</span>" data-en="2nd National Seminar <span>SNPHA 2026</span>">
+        2ème Séminaire National <span>SNPHA 2026</span>
+      </h1>
+
+      <p class="hero-theme" data-fr='"Le projet d\'habitat en Algérie : entre recherche scientifique et réalité construite"' data-en='"The Housing Project in Algeria: between scientific research and built reality"'>
+        "Le projet d'habitat en Algérie : entre recherche scientifique et réalité construite"
+      </p>
+
+      <p class="hero-subtitle-text" data-fr="Pour un habitat ancré dans son environnement – en collaboration avec le ministère de l'Habitat" data-en="For housing rooted in its environment, in collaboration with the Ministry of Housing">
+        Pour un habitat ancré dans son environnement – en collaboration avec le ministère de l'Habitat
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span data-fr="Université Benyoucef Benkhedda Alger 1" data-en="Benyoucef Benkhedda University Algiers 1">Université Benyoucef Benkhedda Alger 1</span>
+        </div>
+        <div class="hero-meta-item">
+          <i class="fas fa-building-columns"></i>
+          <span data-fr="Faculté des Sciences – Département d'Architecture" data-en="Faculty of Sciences – Architecture Department">Faculté des Sciences – Département d'Architecture</span>
+        </div>
+        <div class="hero-meta-item">
+          <i class="fas fa-calendar-alt"></i>
+          <span data-fr="Octobre 2026 – Alger" data-en="October 2026 – Algiers">Octobre 2026 – Alger</span>
+        </div>
+      </div>
+
+      <div class="hero-keywords">
+        <span class="keyword-tag" data-fr="Architecture" data-en="Architecture">Architecture</span>
+        <span class="keyword-tag" data-fr="Recherche Scientifique" data-en="Scientific Research">Recherche Scientifique</span>
+        <span class="keyword-tag" data-fr="Durabilité" data-en="Sustainability">Durabilité</span>
+        <span class="keyword-tag" data-fr="Innovation" data-en="Innovation">Innovation</span>
+        <span class="keyword-tag" data-fr="Habitat" data-en="Housing">Habitat</span>
+      </div>
+
+    </div><!-- /.hero-content -->
+  </div><!-- /.container -->
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" aria-hidden="true">
+    <i class="fas fa-chevron-down"></i>
+    <span data-fr="Défiler" data-en="Scroll">Défiler</span>
+  </div>
+
+  <!-- Countdown Strip -->
+  <div class="hero-countdown-strip">
+    <div class="container">
+      <div class="countdown-inner">
+        <span class="countdown-label" data-fr="Compte à rebours" data-en="Countdown">Compte à rebours</span>
+        <div class="countdown-units">
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-days">000</span>
+            <span class="countdown-unit-label" data-fr="Jours" data-en="Days">Jours</span>
+          </div>
+          <div class="countdown-sep" aria-hidden="true">:</div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-hours">00</span>
+            <span class="countdown-unit-label" data-fr="Heures" data-en="Hours">Heures</span>
+          </div>
+          <div class="countdown-sep" aria-hidden="true">:</div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-mins">00</span>
+            <span class="countdown-unit-label" data-fr="Minutes" data-en="Minutes">Minutes</span>
+          </div>
+          <div class="countdown-sep" aria-hidden="true">:</div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-secs">00</span>
+            <span class="countdown-unit-label" data-fr="Secondes" data-en="Seconds">Secondes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     WAVE SEPARATOR
+══════════════════════════════════════════════════════════════ -->
+<div class="wave-sep" style="background:#1a3a2a;" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ARGUMENTAIRE
+══════════════════════════════════════════════════════════════ -->
+<section id="argumentaire" class="section-pad">
+  <div class="container">
+
+    <div class="reveal">
+      <p class="section-label" data-fr="Argumentaire" data-en="Background">Argumentaire</p>
+      <h2 class="section-title" data-fr="Contexte et enjeux" data-en="Context &amp; Issues">Contexte et enjeux</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="argumentaire-grid">
+      <!-- Text -->
+      <div class="argumentaire-text">
+        <p class="reveal reveal-delay-1"
+           data-fr="Face à une forte demande en logement, aux contraintes économiques, réglementaires et techniques, la production actuelle de l'habitat en Algérie se caractérisera par des modèles standardisés, souvent adaptés aux réalités sociales, culturelles, environnementales et urbaines. Cette situation soulève des questionnements liés à la politique de l'habitat, à la réglementation en vigueur, à la problématique environnementale et énergétique, ainsi qu'à l'identité architecturale."
+           data-en="Facing strong housing demand, economic, regulatory and technical constraints, current housing production in Algeria is characterized by standardized models, often poorly adapted to social, cultural, environmental and urban realities. This situation raises questions about housing policy, current regulations, environmental and energy challenges, as well as architectural identity.">
+          Face à une forte demande en logement, aux contraintes économiques, réglementaires et techniques, la production actuelle de l'habitat en Algérie se caractérisera par des modèles standardisés, souvent adaptés aux réalités sociales, culturelles, environnementales et urbaines. Cette situation soulève des questionnements liés à la politique de l'habitat, à la réglementation en vigueur, à la problématique environnementale et énergétique, ainsi qu'à l'identité architecturale.
+        </p>
+        <p class="reveal reveal-delay-2"
+           data-fr="Au niveau académique, la recherche architecturale et urbaine portant sur l'habitat est riche et diversifiée. Elle mobilise des approches théoriques, environnementales, technologiques et sociales visant à améliorer la qualité architecturale, la durabilité et l'intégration de l'habitat dans son contexte."
+           data-en="At the academic level, architectural and urban research on housing is rich and diversified. It mobilizes theoretical, environmental, technological and social approaches aimed at improving architectural quality, durability and integration of housing in its context.">
+          Au niveau académique, la recherche architecturale et urbaine portant sur l'habitat est riche et diversifiée. Elle mobilise des approches théoriques, environnementales, technologiques et sociales visant à améliorer la qualité architecturale, la durabilité et l'intégration de l'habitat dans son contexte.
+        </p>
+        <p class="reveal reveal-delay-3"
+           data-fr="Néanmoins, la traduction effective de ces travaux scientifiques dans la production sur terrain demeure limitée, révélant un écart persistant entre intentions scientifiques et réalités constructives. Cette situation invite à s'interroger sur le rôle de la recherche scientifique dans le processus de conception et de réalisation de l'habitat."
+           data-en="Nevertheless, the effective translation of scientific work into field production remains limited, revealing a persistent gap between scientific intentions and construction realities. This situation calls for reflection on the role of scientific research in the housing design and implementation process.">
+          Néanmoins, la traduction effective de ces travaux scientifiques dans la production sur terrain demeure limitée, révélant un écart persistant entre intentions scientifiques et réalités constructives. Cette situation invite à s'interroger sur le rôle de la recherche scientifique dans le processus de conception et de réalisation de l'habitat.
+        </p>
+        <p class="reveal reveal-delay-4"
+           data-fr="Dans ce contexte, le présent séminaire se propose d'interroger les modalités de dialogue entre chercheurs, enseignants et praticiens, afin de valoriser les apports réciproques de la recherche académique, de l'enseignement de l'architecture et des pratiques professionnelles, autour des enjeux politiques, environnementaux, identitaires et constructifs."
+           data-en="In this context, the seminar proposes to examine the forms of dialogue between researchers, educators and practitioners, in order to valorize the mutual contributions of academic research, architectural education and professional practices, around political, environmental, identity and construction issues.">
+          Dans ce contexte, le présent séminaire se propose d'interroger les modalités de dialogue entre chercheurs, enseignants et praticiens, afin de valoriser les apports réciproques de la recherche académique, de l'enseignement de l'architecture et des pratiques professionnelles, autour des enjeux politiques, environnementaux, identitaires et constructifs.
+        </p>
+      </div>
+
+      <!-- Highlight card -->
+      <div class="argumentaire-highlight reveal reveal-delay-2">
+        <h3 data-fr="Objectifs du séminaire" data-en="Seminar Objectives">Objectifs du séminaire</h3>
+        <div class="highlight-item">
+          <div class="highlight-icon"><i class="fas fa-comments"></i></div>
+          <div class="highlight-item-text">
+            <strong data-fr="Dialogue interdisciplinaire" data-en="Interdisciplinary Dialogue">Dialogue interdisciplinaire</strong>
+            <span data-fr="Favoriser les échanges entre chercheurs, enseignants et praticiens de l'habitat." data-en="Foster exchanges between researchers, educators and housing practitioners.">Favoriser les échanges entre chercheurs, enseignants et praticiens de l'habitat.</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon"><i class="fas fa-microscope"></i></div>
+          <div class="highlight-item-text">
+            <strong data-fr="Valorisation de la recherche" data-en="Research Valorisation">Valorisation de la recherche</strong>
+            <span data-fr="Promouvoir la traduction des résultats académiques en pratiques constructives." data-en="Promote the translation of academic results into construction practices.">Promouvoir la traduction des résultats académiques en pratiques constructives.</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon"><i class="fas fa-leaf"></i></div>
+          <div class="highlight-item-text">
+            <strong data-fr="Durabilité &amp; Identité" data-en="Sustainability &amp; Identity">Durabilité &amp; Identité</strong>
+            <span data-fr="Ancrer l'habitat dans son environnement naturel, social et culturel." data-en="Root housing in its natural, social and cultural environment.">Ancrer l'habitat dans son environnement naturel, social et culturel.</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon"><i class="fas fa-handshake"></i></div>
+          <div class="highlight-item-text">
+            <strong data-fr="Partenariat institutionnel" data-en="Institutional Partnership">Partenariat institutionnel</strong>
+            <span data-fr="Collaboration avec le Ministère de l'Habitat pour des politiques éclairées." data-en="Collaboration with the Ministry of Housing for informed policies.">Collaboration avec le Ministère de l'Habitat pour des politiques éclairées.</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.argumentaire-grid -->
+
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     AXES THEMATIQUES
+══════════════════════════════════════════════════════════════ -->
+<div class="wave-sep" style="background:#ffffff;" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,0 C360,60 1080,0 1440,30 L1440,0 Z" fill="#f5f0e8"/>
+  </svg>
+</div>
+
+<section id="axes" class="section-pad">
+  <div class="container">
+
+    <div class="reveal center-text">
+      <p class="section-label" data-fr="Axes thématiques" data-en="Thematic Axes">Axes thématiques</p>
+      <h2 class="section-title" data-fr="Les quatre grands axes" data-en="The Four Main Themes">Les quatre grands axes</h2>
+      <div class="gold-line center"></div>
+    </div>
+
+    <div class="axes-grid">
+
+      <!-- Axe 01 -->
+      <div class="axe-card reveal reveal-delay-1">
+        <div class="axe-number" data-fr="Axe 01" data-en="Axis 01">Axe 01</div>
+        <div class="axe-icon-wrap"><i class="fas fa-landmark"></i></div>
+        <h3 class="axe-title"
+            data-fr="Politique de l'habitat et réglementation urbaine, entre urgence et qualité"
+            data-en="Housing Policy and Urban Regulation: between urgency and quality">
+          Politique de l'habitat et réglementation urbaine, entre urgence et qualité
+        </h3>
+        <p class="axe-desc"
+           data-fr="Cet axe s'intéresse aux politiques de l'habitat et la réglementation urbaine en Algérie, à travers la tension entre l'offre en besoins urgents massifs en logements et les exigences de qualité architecturale et urbaine."
+           data-en="This axis focuses on housing policies and urban regulation in Algeria, through the tension between the supply of massive urgent housing needs and the requirements of architectural and urban quality.">
+          Cet axe s'intéresse aux politiques de l'habitat et la réglementation urbaine en Algérie, à travers la tension entre l'offre en besoins urgents massifs en logements et les exigences de qualité architecturale et urbaine.
+        </p>
+      </div>
+
+      <!-- Axe 02 -->
+      <div class="axe-card reveal reveal-delay-2">
+        <div class="axe-number" data-fr="Axe 02" data-en="Axis 02">Axe 02</div>
+        <div class="axe-icon-wrap"><i class="fas fa-seedling"></i></div>
+        <h3 class="axe-title"
+            data-fr="Habitat et environnement durable : qualité de vie, bien-être et performance énergétique"
+            data-en="Sustainable Housing and Environment: quality of life, well-being and energy performance">
+          Habitat et environnement durable : qualité de vie, bien-être et performance énergétique
+        </h3>
+        <p class="axe-desc"
+           data-fr="Cet axe examine la capacité de l'habitat à répondre durablement aux besoins contemporains, en intégrant confort, bien-être et habitabilité. Il s'intéresse à la qualité environnementale comme levier pour un habitat résilient, durable et favorable à la qualité de vie."
+           data-en="This axis examines the capacity of housing to sustainably meet contemporary needs, integrating comfort, well-being and habitability. It focuses on environmental quality as a lever for resilient, sustainable housing that promotes quality of life.">
+          Cet axe examine la capacité de l'habitat à répondre durablement aux besoins contemporains, en intégrant confort, bien-être et habitabilité. Il s'intéresse à la qualité environnementale comme levier pour un habitat résilient, durable et favorable à la qualité de vie.
+        </p>
+      </div>
+
+      <!-- Axe 03 -->
+      <div class="axe-card reveal reveal-delay-3">
+        <div class="axe-number" data-fr="Axe 03" data-en="Axis 03">Axe 03</div>
+        <div class="axe-icon-wrap"><i class="fas fa-mosque"></i></div>
+        <h3 class="axe-title"
+            data-fr="Habitat contemporain et héritages vernaculaires : formes, pratiques et identité"
+            data-en="Contemporary Housing and Vernacular Heritage: forms, practices and identity">
+          Habitat contemporain et héritages vernaculaires : formes, pratiques et identité
+        </h3>
+        <p class="axe-desc"
+           data-fr="Cet axe met l'accent sur le patrimoine vernaculaire comme ressource de projet pour l'habitat contemporain. Il questionne les pratiques socioculturelles, formes et modes de vie locaux, et la construction d'une identité architecturale ancrée dans le territoire."
+           data-en="This axis emphasizes vernacular heritage as a design resource for contemporary housing. It questions socio-cultural practices, local forms and lifestyles, and the construction of an architectural identity rooted in the territory.">
+          Cet axe met l'accent sur le patrimoine vernaculaire comme ressource de projet pour l'habitat contemporain. Il questionne les pratiques socioculturelles, formes et modes de vie locaux, et la construction d'une identité architecturale ancrée dans le territoire.
+        </p>
+      </div>
+
+      <!-- Axe 04 -->
+      <div class="axe-card reveal reveal-delay-4">
+        <div class="axe-number" data-fr="Axe 04" data-en="Axis 04">Axe 04</div>
+        <div class="axe-icon-wrap"><i class="fas fa-hard-hat"></i></div>
+        <h3 class="axe-title"
+            data-fr="Matériaux, procédés et contraintes constructifs dans le projet de l'habitat en Algérie"
+            data-en="Materials, processes and constructive constraints in the housing project in Algeria">
+          Matériaux, procédés et contraintes constructifs dans le projet de l'habitat en Algérie
+        </h3>
+        <p class="axe-desc"
+           data-fr="Cet axe analyse le projet d'habitat à travers les matériaux (locaux et industriels) et les procédés constructifs. Il questionne l'adéquation entre normes, choix de matériaux et pratiques professionnelles dans la réalisation de l'habitat."
+           data-en="This axis analyzes the housing project through materials (local and industrial) and constructive processes. It questions the adequacy between standards, material choices and professional practices in housing construction.">
+          Cet axe analyse le projet d'habitat à travers les matériaux (locaux et industriels) et les procédés constructifs. Il questionne l'adéquation entre normes, choix de matériaux et pratiques professionnelles dans la réalisation de l'habitat.
+        </p>
+      </div>
+
+    </div><!-- /.axes-grid -->
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     DATES IMPORTANTES
+══════════════════════════════════════════════════════════════ -->
+<div class="wave-sep" style="background:#f5f0e8;" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,30 C360,0 1080,60 1440,30 L1440,0 L0,0 Z" fill="#12281d"/>
+  </svg>
+</div>
+
+<section id="dates" class="section-pad">
+  <div class="container">
+
+    <div class="reveal center-text">
+      <p class="section-label" style="color:var(--gold-light);" data-fr="Calendrier" data-en="Schedule">Calendrier</p>
+      <h2 class="section-title light" data-fr="Dates importantes" data-en="Important Dates">Dates importantes</h2>
+      <div class="gold-line center"></div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-dot"><i class="fas fa-file-alt"></i></div>
+        <div class="timeline-body">
+          <div class="timeline-date">
+            <span class="date-badge">30 Juin 2026</span>
+          </div>
+          <div class="timeline-event"
+               data-fr="Date limite de réception des résumés"
+               data-en="Deadline for abstract submission">
+            Date limite de réception des résumés
+          </div>
+          <div class="timeline-note"
+               data-fr="Conformes au modèle du séminaire (voir le site web)"
+               data-en="Must follow the seminar template (see website)">
+            Conformes au modèle du séminaire (voir le site web)
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-dot"><i class="fas fa-bell"></i></div>
+        <div class="timeline-body">
+          <div class="timeline-date">
+            <span class="date-badge">10 Juillet 2026</span>
+          </div>
+          <div class="timeline-event"
+               data-fr="Notification d'acceptation des résumés"
+               data-en="Abstract acceptance notification">
+            Notification d'acceptation des résumés
+          </div>
+          <div class="timeline-note"
+               data-fr="Les auteurs seront notifiés par email"
+               data-en="Authors will be notified by email">
+            Les auteurs seront notifiés par email
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal reveal-delay-3">
+        <div class="timeline-dot"><i class="fas fa-file-lines"></i></div>
+        <div class="timeline-body">
+          <div class="timeline-date">
+            <span class="date-badge">01 Août 2026</span>
+          </div>
+          <div class="timeline-event"
+               data-fr="Date limite de réception des résumés élargis"
+               data-en="Deadline for extended abstract submission">
+            Date limite de réception des résumés élargis
+          </div>
+          <div class="timeline-note"
+               data-fr="Conformes au Template (voir le site web)"
+               data-en="Must follow the template (see website)">
+            Conformes au Template (voir le site web)
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal reveal-delay-4">
+        <div class="timeline-dot"><i class="fas fa-check-circle"></i></div>
+        <div class="timeline-body">
+          <div class="timeline-date">
+            <span class="date-badge">15 Août 2026</span>
+          </div>
+          <div class="timeline-event"
+               data-fr="Notification d'acceptation des résumés élargis"
+               data-en="Extended abstract acceptance notification">
+            Notification d'acceptation des résumés élargis
+          </div>
+          <div class="timeline-note"
+               data-fr="Résultats définitifs de sélection"
+               data-en="Final selection results">
+            Résultats définitifs de sélection
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal reveal-delay-5">
+        <div class="timeline-dot" style="background:linear-gradient(135deg,#c8972a,#e8b84b); box-shadow:0 0 0 6px rgba(200,151,42,.25);">
+          <i class="fas fa-flag-checkered" style="color:var(--dark2);"></i>
+        </div>
+        <div class="timeline-body" style="border-color:rgba(200,151,42,.25); background:rgba(200,151,42,.08);">
+          <div class="timeline-date">
+            <span class="date-badge">Octobre 2026</span>
+          </div>
+          <div class="timeline-event" style="color:var(--gold-light);"
+               data-fr="🎯 Séminaire SNPHA 2026 – Alger"
+               data-en="🎯 SNPHA 2026 Seminar – Algiers">
+            🎯 Séminaire SNPHA 2026 – Alger
+          </div>
+          <div class="timeline-note"
+               data-fr="Université Benyoucef Benkhedda Alger 1, Faculté des Sciences, Département d'Architecture"
+               data-en="Benyoucef Benkhedda University Algiers 1, Faculty of Sciences, Architecture Department">
+            Université Benyoucef Benkhedda Alger 1, Faculté des Sciences, Département d'Architecture
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.timeline -->
+  </div><!-- /.container -->
+</section>
+
+<div class="wave-sep" style="background:#12281d;" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,0 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     COMITÉS
+══════════════════════════════════════════════════════════════ -->
+<section id="comites" class="section-pad">
+  <div class="container">
+
+    <div class="reveal center-text">
+      <p class="section-label" data-fr="Organisation" data-en="Organization">Organisation</p>
+      <h2 class="section-title" data-fr="Comités du séminaire" data-en="Seminar Committees">Comités du séminaire</h2>
+      <div class="gold-line center"></div>
+    </div>
+
+    <!-- Honor Presidents -->
+    <div class="reveal" style="margin-bottom:16px;">
+      <p class="section-label" style="font-size:.68rem; margin-bottom:16px;"
+         data-fr="Présidents d'honneur" data-en="Honorary Presidents">Présidents d'honneur</p>
+    </div>
+    <div class="honor-grid" style="margin-bottom:48px;">
+      <div class="honor-card reveal reveal-delay-1">
+        <div class="honor-avatar"><i class="fas fa-user-tie"></i></div>
+        <div class="honor-role" data-fr="Président d'Honneur" data-en="Honorary President">Président d'Honneur</div>
+        <div class="honor-name">Prof. Ammar Haïhen</div>
+        <div class="honor-affil" data-fr="Recteur de l'Université Benyoucef Benkhedda d'Alger 1" data-en="Rector, Benyoucef Benkhedda University Algiers 1">Recteur de l'Université Benyoucef Benkhedda d'Alger 1</div>
+      </div>
+      <div class="honor-card reveal reveal-delay-2">
+        <div class="honor-avatar"><i class="fas fa-user-tie"></i></div>
+        <div class="honor-role" data-fr="Président d'Honneur" data-en="Honorary President">Président d'Honneur</div>
+        <div class="honor-name">Dr. Mohamed Malik Mahdjoub</div>
+        <div class="honor-affil" data-fr="Doyen de la Faculté des Sciences" data-en="Dean of the Faculty of Sciences">Doyen de la Faculté des Sciences</div>
+      </div>
+      <div class="honor-card reveal reveal-delay-3">
+        <div class="honor-avatar"><i class="fas fa-user-tie"></i></div>
+        <div class="honor-role" data-fr="Président d'Honneur" data-en="Honorary President">Président d'Honneur</div>
+        <div class="honor-name">Dr. Imed Djebaili</div>
+        <div class="honor-affil" data-fr="Chef du Département d'Architecture" data-en="Head of the Architecture Department">Chef du Département d'Architecture</div>
+      </div>
+    </div>
+
+    <!-- Seminar President -->
+    <div class="president-card reveal">
+      <div class="president-avatar"><i class="fas fa-crown"></i></div>
+      <div>
+        <div class="president-role" data-fr="Présidente du séminaire" data-en="Seminar President">Présidente du séminaire</div>
+        <div class="president-name">Dr. Nardjes Aït Yahia</div>
+        <div class="president-affil" data-fr="Docteur / Enseignante – Département d'Architecture, Université Benyoucef Benkhedda Alger 1" data-en="Doctor / Lecturer – Architecture Department, Benyoucef Benkhedda University Algiers 1">Docteur / Enseignante – Département d'Architecture, Université Benyoucef Benkhedda Alger 1</div>
+      </div>
+    </div>
+
+    <!-- Dual committees -->
+    <div class="committees-dual">
+
+      <!-- Scientific Committee -->
+      <div class="committee-block reveal reveal-delay-1">
+        <div class="committee-block-header">
+          <div class="committee-block-icon"><i class="fas fa-flask"></i></div>
+          <h3 class="committee-block-title" data-fr="Comité Scientifique" data-en="Scientific Committee">Comité Scientifique</h3>
+        </div>
+        <div class="committee-president-line">
+          <i class="fas fa-star"></i>
+          <span data-fr="Président : Prof. Salah Kaci (Univ. Alger 1)" data-en="President: Prof. Salah Kaci (Univ. Algiers 1)">Président : Prof. Salah Kaci (Univ. Alger 1)</span>
+        </div>
+        <ul class="member-list">
+          <li><strong>Pr. Mohamed Salah ZEROUALA</strong> – Univ Alger 1</li>
+          <li><strong>Pr. Krimo Dahmani</strong> – Univ Alger 1</li>
+          <li><strong>Pr. Noureddine Zemmouri</strong> – Univ Biskra</li>
+          <li><strong>Pr. Leila Sriti</strong> – Univ Biskra</li>
+          <li><strong>Pr. Djamel Alkama</strong> – Univ Guelma</li>
+          <li><strong>Pr. Azeddine Belakehal</strong> – Univ Biskra</li>
+          <li><strong>Pr. Said Mazouz</strong> – Univ O.Bouaghi</li>
+          <li><strong>Pr. Yacine Bada</strong> – Univ Biskra</li>
+          <li><strong>Pr. Abdallah Farhi</strong> – Univ Biskra</li>
+          <li><strong>Pr. Atef Ahriz</strong> – Univ Tebessa</li>
+          <li><strong>Pr. Mohamed Cherif Adad</strong> – Univ O.Bouaghi</li>
+          <li><strong>Pr. Chennaoul Youcef</strong> – EPAU</li>
+          <li><strong>Pr. Boussoualim Aicha</strong> – EPAU</li>
+          <li><strong>Pr. Fezzai Sofiane</strong> – Univ de Tebessa</li>
+          <li><strong>Pr. Gherzouli Lazhar</strong> – Univ de Tebessa</li>
+          <li><strong>Dr. Med Tayeb Abdelouahad</strong> – Ministère de l'habitat</li>
+          <li><strong>Dr. Nadia Femmam</strong> – Univ Biskra</li>
+          <li><strong>Dr. Naima Haddaou</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Lamia Mansouri</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Imene Haraoubia</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Toufik Mezardi</strong> – Univ Biskra</li>
+          <li><strong>Dr. Ahcene Lakehal</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Manel Soudi</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Khadraoui Mohamed Amine</strong> – Univ Bejaia</li>
+          <li><strong>Dr. Khelil Sara</strong> – Univ de Biskra</li>
+          <li><strong>Dr. Khattabi Latifa</strong> – Univ de Annaba</li>
+        </ul>
+      </div>
+
+      <!-- Organization Committee -->
+      <div class="committee-block reveal reveal-delay-2">
+        <div class="committee-block-header">
+          <div class="committee-block-icon"><i class="fas fa-people-group"></i></div>
+          <h3 class="committee-block-title" data-fr="Comité d'Organisation" data-en="Organization Committee">Comité d'Organisation</h3>
+        </div>
+        <div class="committee-president-line">
+          <i class="fas fa-star"></i>
+          <span data-fr="Présidente : Dr. Asma Fennmam (Univ Alger 1)" data-en="President: Dr. Asma Fennmam (Univ. Algiers 1)">Présidente : Dr. Asma Fennmam (Univ Alger 1)</span>
+        </div>
+        <ul class="member-list">
+          <li><strong>Dr. Mohamed Malik Mahdjoub</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Med Tayeb Abdelouahad</strong> – Ministère de l'habitat</li>
+          <li><strong>Dr. Nardjes Ait Yahia</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Karima Boussaidi</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Amira Ouled Diaf</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Wafa Athmani</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Imane Sfaksi</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Khaled Mansouri</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Imed Djebaili</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Rasha Djedouani</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Faiza Harzeli</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Boutheina Djeddou</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Ouisseme Toubal</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Soumya Besbas</strong> – Univ Alger 1</li>
+          <li><strong>Mme. Imen BOUART</strong> – Univ Alger 1</li>
+          <li><strong>Dr. Wafa Chibane</strong> – EPAU</li>
+          <li><strong>M. Toufik Nebbad</strong> – Univ Alger 1</li>
+        </ul>
+      </div>
+
+    </div><!-- /.committees-dual -->
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     INFORMATIONS PRATIQUES
+══════════════════════════════════════════════════════════════ -->
+<div class="wave-sep" style="background:#ffffff;" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,40 C360,0 1080,60 1440,20 L1440,0 L0,0 Z" fill="#f5f0e8"/>
+  </svg>
+</div>
+
+<section id="infos" class="section-pad">
+  <div class="container">
+
+    <div class="reveal center-text">
+      <p class="section-label" data-fr="Participer" data-en="Participate">Participer</p>
+      <h2 class="section-title" data-fr="Informations pratiques" data-en="Practical Information">Informations pratiques</h2>
+      <div class="gold-line center"></div>
+    </div>
+
+    <div class="info-grid">
+
+      <!-- Public cible -->
+      <div class="info-card reveal reveal-delay-1">
+        <div class="info-icon"><i class="fas fa-users"></i></div>
+        <div class="info-card-title" data-fr="Public cible" data-en="Target Audience">Public cible</div>
+        <div class="info-card-body"
+             data-fr="<strong>Chercheurs, enseignants, étudiants</strong>, professionnels et acteurs institutionnels de l'habitat en Algérie et à l'international."
+             data-en="<strong>Researchers, educators, students</strong>, professionals and institutional actors in housing in Algeria and internationally.">
+          <strong>Chercheurs, enseignants, étudiants</strong>, professionnels et acteurs institutionnels de l'habitat en Algérie et à l'international.
+        </div>
+      </div>
+
+      <!-- Frais de participation -->
+      <div class="info-card reveal reveal-delay-2">
+        <div class="info-icon"><i class="fas fa-ticket-alt"></i></div>
+        <div class="info-card-title" data-fr="Frais de participation" data-en="Participation Fees">Frais de participation</div>
+        <div class="info-card-body">
+          <span class="highlight-val">4 000 Da</span>
+          <span data-fr="Inclut : accès à toutes les sessions, actes du séminaire, repas &amp; pauses café, certificat de participation." data-en="Includes: access to all sessions, seminar proceedings, meals &amp; coffee breaks, participation certificate.">
+            Inclut : accès à toutes les sessions, actes du séminaire, repas &amp; pauses café, certificat de participation.
+          </span>
+          <br/><br/>
+          <strong>CCP :</strong> XXXXX Clé XX<br/>
+          <strong>RIP :</strong> xxxxxxxxxxxxXXX
+        </div>
+      </div>
+
+      <!-- Modalités de présentation -->
+      <div class="info-card reveal reveal-delay-3">
+        <div class="info-icon"><i class="fas fa-presentation-screen"></i></div>
+        <div class="info-card-title" data-fr="Modalités de présentation" data-en="Presentation Modalities">Modalités de présentation</div>
+        <div class="info-card-body">
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--dark),var(--mid));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="fas fa-microphone" style="color:var(--gold);font-size:.85rem;"></i>
+              </div>
+              <span data-fr="Présentation orale" data-en="Oral Presentation">Présentation orale</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--dark),var(--mid));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="fas fa-image" style="color:var(--gold);font-size:.85rem;"></i>
+              </div>
+              <span data-fr="Poster" data-en="Poster">Poster</span>
+            </div>
+          </div>
+          <div class="languages-row">
+            <div class="lang-chip"><i class="fas fa-globe"></i> Français</div>
+            <div class="lang-chip"><i class="fas fa-globe"></i> English</div>
+            <div class="lang-chip"><i class="fas fa-globe"></i> عربي</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.info-grid -->
+
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════════════ -->
+<div class="wave-sep" style="background:#f5f0e8;" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,20 C360,60 1080,0 1440,40 L1440,0 L0,0 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+<section id="contact" class="section-pad">
+  <div class="container">
+
+    <div class="reveal center-text">
+      <p class="section-label" data-fr="Nous contacter" data-en="Get in Touch">Nous contacter</p>
+      <h2 class="section-title" data-fr="Contact" data-en="Contact Us">Contact</h2>
+      <div class="gold-line center"></div>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- Contact items -->
+      <div class="contact-info-block">
+
+        <div class="contact-item reveal reveal-delay-1">
+          <div class="contact-item-icon"><i class="fas fa-flask"></i></div>
+          <div>
+            <div class="contact-item-label" data-fr="Comité Scientifique" data-en="Scientific Committee">Comité Scientifique</div>
+            <div class="contact-item-value">
+              <a href="mailto:cnpha.sc@univ-alger.dz">cnpha.sc@univ-alger.dz</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-2">
+          <div class="contact-item-icon"><i class="fas fa-people-group"></i></div>
+          <div>
+            <div class="contact-item-label" data-fr="Comité d'Organisation" data-en="Organization Committee">Comité d'Organisation</div>
+            <div class="contact-item-value">
+              <a href="mailto:cnpha.org@univ-alger.dz">cnpha.org@univ-alger.dz</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-3">
+          <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <div class="contact-item-label" data-fr="Téléphone" data-en="Phone">Téléphone</div>
+            <div class="contact-item-value">021 __ __ __ __</div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-4">
+          <div class="contact-item-icon"><i class="fas fa-building-columns"></i></div>
+          <div>
+            <div class="contact-item-label" data-fr="Établissement" data-en="Institution">Établissement</div>
+            <div class="contact-item-value"
+                 data-fr="Université Benyoucef Benkhedda Alger 1 – Faculté des Sciences, Département d'Architecture"
+                 data-en="Benyoucef Benkhedda University Algiers 1 – Faculty of Sciences, Architecture Department">
+              Université Benyoucef Benkhedda Alger 1 – Faculté des Sciences, Département d'Architecture
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.contact-info-block -->
+
+      <!-- Map placeholder -->
+      <div class="contact-map-placeholder reveal reveal-delay-2">
+        <div class="map-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <h3 data-fr="Lieu du séminaire" data-en="Seminar Venue">Lieu du séminaire</h3>
+        <div class="location-detail">
+          <i class="fas fa-university"></i>
+          <span data-fr="Université Benyoucef Benkhedda Alger 1" data-en="Benyoucef Benkhedda University Algiers 1">Université Benyoucef Benkhedda Alger 1</span>
+        </div>
+        <div class="location-detail">
+          <i class="fas fa-door-open"></i>
+          <span data-fr="Faculté des Sciences – Département d'Architecture" data-en="Faculty of Sciences – Architecture Department">Faculté des Sciences – Département d'Architecture</span>
+        </div>
+        <div class="location-detail">
+          <i class="fas fa-map-pin"></i>
+          <span data-fr="Alger, Algérie" data-en="Algiers, Algeria">Alger, Algérie</span>
+        </div>
+        <div class="location-detail">
+          <i class="fas fa-calendar"></i>
+          <span data-fr="Octobre 2026" data-en="October 2026">Octobre 2026</span>
+        </div>
+        <p style="margin-top:24px; font-size:.8rem; color:rgba(255,255,255,.45);"
+           data-fr="Pour toute question logistique, veuillez contacter le comité d'organisation."
+           data-en="For any logistical questions, please contact the organization committee.">
+          Pour toute question logistique, veuillez contacter le comité d'organisation.
+        </p>
+      </div>
+
+    </div><!-- /.contact-grid -->
+  </div><!-- /.container -->
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════ -->
+<div class="wave-sep" style="background:#ffffff;" aria-hidden="true">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0,0 C360,40 1080,10 1440,30 L1440,60 L0,60 Z" fill="#12281d"/>
+  </svg>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <div class="footer-logo-badge">S</div>
+        <div class="footer-logo-text">
+          <div class="footer-logo-name">SNPHA 2026</div>
+          <div class="footer-logo-year" data-fr="Séminaire National – Algérie" data-en="National Seminar – Algeria">Séminaire National – Algérie</div>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-motto-block">
+        <div class="footer-motto"
+             data-fr="« Ensemble, construisons demain un habitat durable et innovant »"
+             data-en="« Together, let's build tomorrow's sustainable and innovative housing »">
+          « Ensemble, construisons demain un habitat durable et innovant »
+        </div>
+        <div class="footer-motto-sub" data-fr="Thème du séminaire SNPHA 2026" data-en="SNPHA 2026 Seminar Theme">Thème du séminaire SNPHA 2026</div>
+      </div>
+    </div><!-- /.footer-top -->
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 SNPHA –
+        <span data-fr="Université Benyoucef Benkhedda Alger 1" data-en="Benyoucef Benkhedda University Algiers 1">Université Benyoucef Benkhedda Alger 1</span>.
+        <span data-fr="Tous droits réservés." data-en="All rights reserved.">Tous droits réservés.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#hero"         data-fr="Accueil"          data-en="Home">Accueil</a>
+        <a href="#contact"      data-fr="Contact"          data-en="Contact">Contact</a>
+        <a href="#dates"        data-fr="Dates"            data-en="Dates">Dates</a>
+        <a href="#argumentaire" data-fr="Argumentaire"     data-en="About">Argumentaire</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="back-to-top" onclick="scrollToTop()" aria-label="Retour en haut">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════════ -->
+<script>
+  /* ── LANGUAGE SYSTEM ──────────────────────────────── */
+  let currentLang = 'fr';
+
+  function setLang(lang) {
+    currentLang = lang;
+
+    // Update all elements with data-fr / data-en
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (!text) return;
+      // Check if content has HTML tags
+      if (text.includes('<') || text.includes('&')) {
+        el.innerHTML = text;
+      } else {
+        el.textContent = text;
+      }
+    });
+
+    // Update countdown unit labels
+    document.querySelectorAll('.countdown-unit-label[data-fr]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-fr');
+    });
+
+    // Toggle active button state
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const isActive = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive);
+    });
+
+    // Update html lang attribute
+    document.documentElement.lang = lang === 'en' ? 'en' : 'fr';
+  }
+
+  /* ── NAVBAR SCROLL ───────────────────────────────── */
+  const navbar = document.getElementById('navbar');
+  const backToTop = document.getElementById('back-to-top');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  function onScroll() {
+    const y = window.scrollY;
+
+    // Scrolled class
+    navbar.classList.toggle('scrolled', y > 60);
+
+    // Back to top visibility
+    backToTop.classList.toggle('visible', y > 400);
+
+    // Active nav link
+    let current = '';
+    sections.forEach(sec => {
+      if (y >= sec.offsetTop - 100) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      const href = a.getAttribute('href').replace('#', '');
+      a.classList.toggle('active', href === current);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── SCROLL TO TOP ───────────────────────────────── */
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── MOBILE MENU ─────────────────────────────────── */
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const ham  = document.getElementById('hamburger');
+    const open = menu.classList.toggle('open');
+    ham.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  // Close mobile menu on ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const menu = document.getElementById('mobile-menu');
+      if (menu.classList.contains('open')) toggleMobileMenu();
+    }
+  });
+
+  /* ── COUNTDOWN TIMER ─────────────────────────────── */
+  const targetDate = new Date('2026-10-01T08:00:00');
+
+  function pad(n, d = 2) {
+    return String(n).padStart(d, '0');
+  }
+
+  function updateCountdown() {
+    const now  = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent  = '000';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent  = '00';
+      document.getElementById('cd-secs').textContent  = '00';
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
+
+    document.getElementById('cd-days').textContent  = pad(days, 3);
+    document.getElementById('cd-hours').textContent = pad(hours);
+    document.getElementById('cd-mins').textContent  = pad(mins);
+    document.getElementById('cd-secs').textContent  = pad(secs);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── SCROLL REVEAL ───────────────────────────────── */
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── SMOOTH SCROLL FOR ALL ANCHORS ──────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  /* ── ANIMATED NUMBER TICK for countdown display ── */
+  // Adds a brief flash animation when digits change
+  const cdEls = ['cd-days','cd-hours','cd-mins','cd-secs'].map(id => document.getElementById(id));
+  let prevValues = ['','','',''];
+
+  function tickCountdown() {
+    const now  = new Date();
+    const diff = targetDate - now;
+    if (diff <= 0) return;
+
+    const vals = [
+      pad(Math.floor(diff / 86400000), 3),
+      pad(Math.floor((diff % 86400000) / 3600000)),
+      pad(Math.floor((diff % 3600000)  / 60000)),
+      pad(Math.floor((diff % 60000)    / 1000))
+    ];
+
+    vals.forEach((v, i) => {
+      if (v !== prevValues[i]) {
+        cdEls[i].textContent = v;
+        cdEls[i].style.transform = 'translateY(-4px)';
+        cdEls[i].style.transition = 'transform .15s ease';
+        setTimeout(() => {
+          cdEls[i].style.transform = 'translateY(0)';
+        }, 150);
+        prevValues[i] = v;
+      }
+    });
+  }
+
+  setInterval(tickCountdown, 1000);
+</script>
+
+</body>
+</html>
